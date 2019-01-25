@@ -57,6 +57,6 @@ namespace CS.Impl._02_Intermediate
                 else
                     return IsPalindrome(text.Substring(1, text.Length - 2));
             }
-        }
+        }        
     }
 }

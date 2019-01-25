@@ -38,7 +38,15 @@ namespace CS.Impl._03_Linq
 
         public IEnumerable<Tuple<string, string, int, double>> GetFinalReceipe(List<Item> items, List<Client> clients, List<Purchase> purchases)
         {
-            throw new NotImplementedException();
+            var joins = purchases.Join(clients,
+                purchase => purchase.ClientId,
+                client => client.Id,  
+                (purchase, client) => new { Purchase = purchase, Client = client });
+            var result = joins.Join(items,
+                join => join.Purchase.ItemId,
+                item => item.Id,
+                (join, item) => new Tuple<string, string, int, double>(join.Client.Name, item.Label, join.Purchase.Quantity, item.Price));
+            return result;
         }
     }
 
