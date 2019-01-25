@@ -8,7 +8,8 @@ namespace CS.Tests._04_Advanced
     public class PermutationPrimeTests
     {
         [TestMethod]
-        [Description("The number 113, is called a permutation prime because all rotations of the digits: 113, 131, and 311, are themselves prime. There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.")]
+        [Description("The number 113, is called a permutation prime because all rotations of the digits: 113, 131, and 311, are themselves prime. " +
+            "There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.")]
         public void ShouldFind13PermutationPrimeNumbersBelow100()
         {
             // Arrange

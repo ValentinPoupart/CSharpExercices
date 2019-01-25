@@ -19,7 +19,6 @@ namespace CS.Impl._03_Linq
 
         public IEnumerable<int> GetTopNRecords(int limit, IEnumerable<int> numbers)
         {
-            int count = 0;
             return numbers.OrderByDescending(x => x).Take(limit);
         }
 
