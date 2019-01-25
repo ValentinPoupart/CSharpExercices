@@ -6,7 +6,13 @@ namespace CS.Impl._01_Basic
     {
         public string Reverse(string sentence)
         {
-            throw new NotImplementedException();
+            var sentenceSplit = sentence.Split(' ');
+            string res = "";
+            foreach (string str in sentenceSplit)
+            {
+                res = res == "" ? $"{str}" : $"{str} {res}";
+            }
+            return res;
         }
     }
 }

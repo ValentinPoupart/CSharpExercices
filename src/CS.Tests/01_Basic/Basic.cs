@@ -18,7 +18,7 @@ namespace CS.Tests._01_Basic
             var actual = subject.SayHello();
 
             // Assert
-            Assert.AreEqual("Hello Jounad Tourvieille", actual);
+            Assert.AreEqual("Hello Valentin Poupart", actual);
         }
 
         [TestMethod]
