@@ -18,6 +18,7 @@ namespace CS.Tests._02_Intermediate
 
             Assert.AreEqual(2520, result);
         }
+
         [TestMethod]
         public void EulerTestSmallest_EvenlyDivisible_ByNumber_From_1to20()
         {
@@ -26,6 +27,16 @@ namespace CS.Tests._02_Intermediate
             var result = euler.SmallestMultiple(20, 20);
 
             Assert.AreEqual(232792560, result);
+        }
+
+        [TestMethod]
+        public void EulerTestSmallest_EvenlyDivisible_ByNumber_From_1to11()
+        {
+            var euler = new Euler();
+
+            var result = euler.SmallestMultiple(11, 11);
+
+            Assert.AreEqual(27720, result);
         }
 
     }

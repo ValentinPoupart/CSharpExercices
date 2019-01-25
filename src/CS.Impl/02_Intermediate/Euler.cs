@@ -6,7 +6,7 @@ namespace CS.Impl._02_Intermediate
 {
     public class Euler
     {
-        //public int SmallestMultiple(int max, int value = 1)
+        //public long SmallestMultiple(long max, long value = 1)
         //{
         //    if (IsDivisible(max, value))
         //        return value;
@@ -14,24 +14,24 @@ namespace CS.Impl._02_Intermediate
         //        return SmallestMultiple(max, value + 1);
         //}
 
-        public bool IsDivisible(int max, int value)
+        public bool IsDivisible(long max, long value)
         {
-            for (int i = 2; i != max; i++)
+            for (long i = 2; i != max; i++)
             {
-                int testDivision = value % i;
+                long testDivision = value % i;
                 if (testDivision != 0)
                     return false;
             }
             return true;
         }
 
-        public int SmallestMultiple(int max, int value = 1)
+        public long SmallestMultiple(long max, long value = 0)
         {
             try
             {
                 while (!IsDivisible(max, value))
                 {
-                    value++;
+                    value += max;
                 }
                 return value;
             }
