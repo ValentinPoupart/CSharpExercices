@@ -6,15 +6,21 @@ namespace CS.Impl._04_Advanced
 {
     public class PermutationPrime
     {
-        private static IEnumerable<string> Permutate(string source)
+        private static IEnumerable<string> permutations = new List<string>();
+
+        private void WordPermuatation(string prefix, string word)
         {
-            if (source.Length == 1) return new List<string> { source };
-
-            var permutations = from c in source
-                               from p in Permutate(new String(source.Where(x => x != c).ToArray()))
-                               select c + p;
-
-            return permutations;
+            int n = word.Length;
+            if (n == 0) {
+                permutations = permutations.Append(prefix);
+            }
+            else
+            {
+                for (int i = 0; i < n; i++)
+                {
+                    WordPermuatation(prefix + word[i], word.Substring(0, i) + word.Substring(i + 1, n - (i + 1)));
+                }
+            }
         }
 
         public int[] GetPermutationPrimes(int upperBound)
@@ -24,21 +30,29 @@ namespace CS.Impl._04_Advanced
                 int[] result = new int[] { };
                 for (int i = upperBound; i != 1; i--)
                 {
-                    var permutationsNumbers = Permutate(i.ToString());
+                    Console.WriteLine($"===========================");
+                    Console.WriteLine($"{i}: ");
+                    permutations = new List<string>();
+                    WordPermuatation("", i.ToString());
                     var testPrimeOnPermutation = true;
-                    foreach (string n in permutationsNumbers)
+                    if (IsPrime(i))
                     {
-                        testPrimeOnPermutation = IsPrime(int.Parse(n)) && testPrimeOnPermutation && i.ToString().Length == n.Length; 
-                    }
-                    if (testPrimeOnPermutation && IsPrime(i))
-                    {
-                        if (!result.Contains(i))
-                            result = result.Append(i).ToArray();
-                        foreach (string n in permutationsNumbers)
+                        Console.WriteLine($"{i} prime ");
+                        foreach (string n in permutations)
                         {
-                            var intParse = int.Parse(n);
-                            if (!result.Contains(intParse))
-                                result = result.Append(intParse).ToArray();
+                            testPrimeOnPermutation = IsPrime(int.Parse(n)) && testPrimeOnPermutation;
+                            Console.WriteLine($"{n} is {testPrimeOnPermutation}");
+                        }
+                        if (testPrimeOnPermutation)
+                        {
+                            if (!result.Contains(i))
+                                result = result.Append(i).ToArray();
+                            foreach (string n in permutations)
+                            {
+                                var intParse = int.Parse(n);
+                                if (!result.Contains(intParse))
+                                    result = result.Append(intParse).ToArray();
+                            }
                         }
                     }
                 }
@@ -50,28 +64,19 @@ namespace CS.Impl._04_Advanced
             }
         }
 
-        private bool IsPrime(int n)
+        public static bool IsPrime(int number)
         {
-            return IsPrime(n, n / 2);
-        }
+            if (number <= 1) return false;
+            if (number == 2) return true;
+            if (number % 2 == 0) return false;
 
-        private bool IsPrime(int n, int current)
-        {
-            if (current == 0)
-            {
-                return false;
-            }
-            if (current == 1)
-            {
-                return true;
-            }
-            else
-            {
-                if (n % current == 0)
+            var boundary = (int)Math.Floor(Math.Sqrt(number));
+
+            for (int i = 3; i <= boundary; i += 2)
+                if (number % i == 0)
                     return false;
-                else
-                    return IsPrime(n, current - 1);
-            }
+
+            return true;
         }
     }
 }

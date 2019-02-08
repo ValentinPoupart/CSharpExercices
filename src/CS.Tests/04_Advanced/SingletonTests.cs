@@ -25,7 +25,7 @@ namespace CS.Tests._04_Advanced
         public void GetTheSameInstanceOfSingletonUsingIoC()
         {
             // Arrange
-            using (var serviceProvider = new ServiceCollection().BuildServiceProvider())
+            using (var serviceProvider = new ServiceCollection().AddSingleton<IMySingleton, MySingleton>().BuildServiceProvider())
             {
                 // Act
                 var singleton1 = serviceProvider.GetService<IMySingleton>();

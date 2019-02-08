@@ -2,11 +2,40 @@
 
 namespace CS.Impl._04_Advanced
 {
-    public class Singleton
+    public class Singleton : IMySingleton
     {
-        public static Singleton Instance => throw new NotImplementedException();
+        private Singleton() { }
+
+        private static Singleton _instance;
+
+        public static Singleton Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Singleton();
+                }
+                return _instance;
+            }
+        }
+
+        public string Function()
+        {
+            return "";
+        }
     }
 
-    public interface IMySingleton { }
-    public class MySingleton : IMySingleton { }
+    public interface IMySingleton
+    {
+        string Function();
+    }
+
+    public class MySingleton : IMySingleton
+    {
+        public string Function()
+        {
+            return "";
+        }
+    }
 }
